@@ -1,5 +1,6 @@
 import React from "react";
 import ToDoItem from "./todoItem";
+import TodoAdd from "./TodoAdd";
 
 
 
@@ -8,24 +9,30 @@ export default class Todos extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            date: new Date(),
-            items: [
+           // date: new Date(),
+           msg : '',
+          data : [
                 {
-
+                    "key":1,
                     "id": 1,
-                    "title": "delectus aut autem",
+                    "title": "Finished my React course",
+                    "status" : false
 
                 },
                 {
 
+                    "key":2,
                     "id": 2,
-                    "title": "quis ut nam facilis et officia qui",
+                    "title": "Share Study React course",
+                    "status": false
 
                 },
                 {
 
+                    "key":3,
                     "id": 3,
                     "title": "fugiat veniam minus",
+                    "status": false
 
                 }
 
@@ -64,17 +71,24 @@ export default class Todos extends React.Component {
         
     }
 
+
+    addTodo= (newItem) => {
+        this.setState ({data:[...this.state.data.newItem]})
+    }
+
     render() {
-        let { items } = this.state;
+        let { data, msg } = this.state;
         return (
             <div>
 
-
-                <h2> It is {this.state.date.toLocaleTimeString()}. </h2>
+{/* 
+                <h2> It is {this.state.date.toLocaleTimeString()}. </h2> */}
+                <h3>{msg}</h3>
+                <TodoAdd   addTodo={this.addTodo} />
                 <ul className="list-group">
                     {
-                        items.map((value, index) => {
-                            return <ToDoItem title={value.title} deleteItem={this.deleteItem} index={index}
+                        data.map((value, index) => {
+                            return <ToDoItem  title={value.title} id={value.id} deleteItem={this.deleteItem} index={index}
                             markeCompleted={this.markeCompleted}  />
                         })
                     }
